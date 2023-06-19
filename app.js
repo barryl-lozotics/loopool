@@ -118,7 +118,6 @@ config.processConfig(function (configDbHandle, configSysDbHandle, configSysDbCon
 	// use content assets from this path
 	app.use(express.static(path.join(__dirname, 'public')));
 
-	/*
 	//
 	//set up db driver
 	app.use(function (req, res, next) {
@@ -129,7 +128,6 @@ config.processConfig(function (configDbHandle, configSysDbHandle, configSysDbCon
 
 		next();
 	});
-	*/
 
 
 	//
@@ -153,14 +151,11 @@ config.processConfig(function (configDbHandle, configSysDbHandle, configSysDbCon
 	// set up middleware
 	app.use('/', routes);
 
-	/*
-
 	//
 	// add specific routes
 	var loopoolEvents = require('./routes/loopoolEvents');
 	app.use('/loopoolEvents', loopoolEvents);
 
-	*/
 
 	// error handlers
 

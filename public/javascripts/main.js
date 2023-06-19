@@ -6,46 +6,23 @@
 //
 // constants
 var thisLocation = '/main';
-
-
-var days = [ 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa' ];  // match with Date obj
-var lastDate = "12/31/2099";
-
-var dayTimes = [ 'morning', 'midday', 'afternoon', 'evening', 'night'];
-
 var copyrightString = '(c) 2023 lozotics llc all rights reserved';
 		
-
 //
 // cache
 var userData = {};
 
+var loadTimer = {};
+var loadInterval = 2000;
 
+var transTimes = {};
+transTimes.totalTime = 0;
+transTimes.totalTrans = 0;
 
-
-var authUser = {};
-var areasArray = [];
-var objectivesArray = [];
-var taskArray = [];
-
-var daylistDate = null;
-
-var hamburgerBuilt = false;
-var hamburgerDisplayed = false;
-
-var taskTypeToggle = '';
-var taskRecurToggle = '';
-
-
-//
-// generated results
-var daylistArray =  [];
-var donelistArray = [];
 
 //
 // controls
-var planningHorizon = 30;		// days ahead
-
+var loadingState = false;
 
 
 //
@@ -95,67 +72,20 @@ $(document).ready(function () {
 //	userData.user = document.getElementsByName('reqUser')[0].getAttribute('content');
 
 	var headerStr = document.getElementsByName('reqHeaders')[0].getAttribute('content');
+	var ipStr = document.getElementsByName('reqIP')[0].getAttribute('content');
 
-	processHeaders(headerStr, function() {
-		console.log('>>>> userData: %s', JSON.stringify(userData));
+	processHeaders(headerStr, ipStr, function() {
 
-		postAmble();
-	});
+		displayUserData(function() {
 
-	/*
-	//
-	// commence page build
-	who(function () {
+			displayResults(function() {
 
-		// populate and display nav bar
-		populateNavBar();
+				postAmble();
 
-		//
-		// fetch core user data
-		fetchObjectives(function () {
-			populateTasks(function () {
-
-				//
-				// detect new users
-				if (objectivesArray.length == 0) {
-					//
-					// and redirect into gameplan
-					window.location = '/gameplanViewer';
-				}
-
-				//
-				// else generate daylist UI
-				generateDaylist(function () {
-
-					generateDonelist(function () {
-
-						if (taskIndex !== undefined && taskIndex.length > 0) {
-
-							console.log('>>>> populating taskDialog');
-
-							postAmble();
-
-							clickDaylistItem(taskIndex);
-
-						} else {
-
-							populateDaylist(function () {
-
-								populateAds(function () {
-
-									postAmble();
-								});
-							});
-
-						}
-
-					});
-
-				});
 			});
+
 		});
 	});
-	*/
 
 
 	function postAmble() {
@@ -175,8 +105,8 @@ $(document).ready(function () {
 
 // Functions =============================================================
 
-function processHeaders(headerStr, callback) {
-	console.log('>>> processHeaders');
+function processHeaders(headerStr, ipStr, callback) {
+//	console.log('>>> processHeaders');
 
 //	console.log('>>>> headerStr: %s', headerStr);
 	var headerObj = JSON.parse(headerStr);
@@ -195,6 +125,7 @@ function processHeaders(headerStr, callback) {
 	//
 	// update cache
 	userData.user = userCookie;
+	userData.ip = ipStr;
 	userData.headers = headers;
 
 
@@ -202,6 +133,206 @@ function processHeaders(headerStr, callback) {
 }
 
 
+function displayUserData(callback) {
+//	console.log('>>> displayUserData');
+
+//	console.log('>>>> userData: %s', JSON.stringify(userData));
+
+	//
+	// build html content for userInfo
+	var infoStr = '';
+
+	infoStr += '<h2 style="text-align: center;">Welcome User ' + userData.user + '<h2>';
+
+	infoStr += '<table>';
+
+	infoStr += '<tr>';
+	infoStr += '<td>incomingIP</td>';
+	infoStr += '<td>' + userData.ip + '</td>';
+	infoStr += '</tr>';
+
+	infoStr += '<tr>';
+	infoStr += '<td>userAgent</td>';
+	infoStr += '<td>' + userData.headers.userAgent + '</td>';
+	infoStr += '</tr>';
+
+	infoStr += '<tr>';
+	infoStr += '<td>platform</td>';
+	infoStr += '<td>' + userData.headers.secChUaPlatform + '</td>';
+	infoStr += '</tr>';
+
+	infoStr += '</table>';
+
+	//
+	// render
+	$("#userInfo").html(infoStr);
+
+
+	//
+	// build content for userControls
+	var controlStr = '';
+
+	controlStr += '<h2 style="text-align: center;">User Controls<h2>';
+
+	controlStr += '<div id="userControlsButtonPad">';
+	controlStr += '<button id="loadButton"></button>';
+	controlStr += '</div>';
+
+	controlStr += '<div id="userControlsValues">';
+	controlStr += '<h3>Transaction interval (ms)</h3>';
+	controlStr += '<input id="transRate" size=10 />'
+	controlStr += '</div>';
+
+	//
+	// render
+	$("#userControls").html(controlStr);
+
+	//
+	// button handler
+	$("#loadButton").on("click", handleLoadButton);
+
+	//
+	// ...and set initial states
+	handleLoadButton(true);
+	$("#transRate").val(loadInterval);
+
+	callback(null);
+}
+
+function displayResults(callback) {
+//	console.log('>>> displayResults');
+
+//	console.log('>>>> transTimes: %s', JSON.stringify(transTimes));
+
+	//
+	// build html content for load metrics
+	var infoStr = '';
+
+	infoStr += '<h2 style="text-align: center;">Load Metrics<h2>';
+
+
+	if (transTimes.totalTrans == 0) {
+		infoStr += '<h3 style="text-align: center;">No load run to display</h3>';
+
+	} else {
+
+		infoStr += '<table style="margin: 0 auto; width: 50%;">';
+
+		var latestStart = new Date(transTimes.latestLoadStart);
+		infoStr += '<th colspan=2>For load run started: <br>' + latestStart.toLocaleString() + '</th>';
+
+		infoStr += '<tr>';
+		infoStr += '<td>Total Transactions</td>';
+		infoStr += '<td>' + transTimes.totalTrans + '</td>';
+		infoStr += '</tr>';
+
+		infoStr += '<tr>';
+		infoStr += '<td>Latest round-trip (ms)</td>';
+		infoStr += '<td>' + transTimes.latestTime + '</td>';
+		infoStr += '</tr>';
+
+		infoStr += '<tr>';
+		infoStr += '<td>Average round-trip (ms)</td>';
+		var avgTime = transTimes.totalTime / transTimes.totalTrans;
+		infoStr += '<td>' + Math.round(avgTime) + '</td>';
+		infoStr += '</tr>';
+
+		infoStr += '</table>';
+
+	}	
+
+	//
+	// render
+	$("#loadMetrics").html(infoStr);
+
+
+	callback(null);
+}
+
+function handleLoadButton(init) {
+//	console.log('>>> handleLoadButton');
+	var toggleTime = new Date();
+
+	if (init !== undefined && init == true) {
+		$("#loadButton").text("Start Loading");
+		$("#loadButton").attr("style", "color: green;");
+	
+	} else {
+		//
+		// toggle state
+		if (loadingState == false) {
+			$("#loadButton").text("Stop Loading");
+			$("#loadButton").attr("style", "color: red;");
+		
+			//
+			// commence load generation
+			loadInterval = $("#transRate").val();
+			loadTimer = setInterval(loadTransaction, loadInterval);
+
+			loadingState = true;
+			console.log('>>>> Load started: %s', toggleTime.toLocaleString());
+		} else {
+			$("#loadButton").text("Start Loading");
+			$("#loadButton").attr("style", "color: green;");
+		
+			//
+			// cease load generation
+			clearInterval(loadTimer);
+
+			loadingState = false;
+			console.log('>>>> Load stopped: %s', toggleTime.toLocaleString());
+		}
+	}
+}
+
+function loadTransaction() {
+//	console.log('>>> loadTransaction');
+
+	var transStart = new Date();
+
+	var eventData = {};
+
+	eventData.user = userData.user;
+	eventData.incomingIP = userData.ip;
+	eventData.userAgent = userData.headers.userAgent;
+	eventData.secChUa = userData.headers.secChUa;
+	eventData.secChUaPlatform = userData.headers.secChUaPlatform;
+
+	//
+	// call the back-end route with an Ajax POST
+	$
+	.ajax({
+		type: 'POST',
+		data: eventData,
+		url: '/loopoolEvents/new',
+		dataType: 'JSON'
+	})
+	.done(
+		function (response) {
+//					console.log('>>>>> ajax call returned: %s', JSON.stringify(response));
+
+			//
+			// update cache
+			var transEnd = new Date();
+			var transTime = transEnd - transStart;
+
+			if (transTimes.totalTrans == 0) {
+				transTimes.latestLoadStart = transStart;
+			}
+
+			transTimes.totalTrans++;
+			transTimes.latestTime = transTime;
+			transTimes.totalTime += transTime;
+			console.log('>>>> loadTrans [%d]: %d ms / avg %d ms', transTimes.totalTrans, transTime, transTimes.totalTime/transTimes.totalTrans);
+
+			//
+			// update metrics display
+			displayResults(function() {
+				// no-op
+			});
+		});
+
+}
 
 
 function fetchObjectives(callback) {

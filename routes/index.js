@@ -33,6 +33,7 @@ router.get('/main',
 
 //    console.log('>>>> contents of req: %s', JSON.stringify(req.headers));
     var reqHeaders = req.headers;
+    var reqIP = req.ip;
 
     res.render('main', {
 
@@ -42,6 +43,7 @@ router.get('/main',
       pageTitle: 'loopool: main',
 
       reqHeaders: reqHeaders,
+      reqIP: reqIP,
 
     });
   }
