@@ -31,12 +31,17 @@ router.get('/main',
       relDate = req.configData.build.releaseDate;
     }
 
+//    console.log('>>>> contents of req: %s', JSON.stringify(req.headers));
+    var reqHeaders = req.headers;
+
     res.render('main', {
 
       releaseVersion: relVersion,
       releaseDate: relDate,
 
       pageTitle: 'loopool: main',
+
+      reqHeaders: reqHeaders,
 
     });
   }

@@ -1,0 +1,760 @@
+body {
+	font: 14px Times New Roman, sans-serif;
+	background-image: url('');
+	background-color: darkblue;
+}
+
+h0 {
+	font: 32px Times New Roman, sans-serif;
+	text-align: center;
+}
+
+h1 {
+	font: 18px Times New Roman, sans-serif;
+}
+
+h2 {
+	font: 24px Times New Roman, sans-serif;
+	color: goldenrod;
+}
+
+h3 {
+	font: 16px Times New Roman, sans-serif;
+}
+
+h4 {
+	padding-left: 10px;
+	font: 12px Times New Roman, sans-serif;
+}
+
+#pageHeader {
+	display: flex;
+	flex-flow: row;
+}
+
+#titleWrapper {
+	width: 95%;
+	margin: 0 auto;
+	background: lightgray;
+	text-align: center;
+}
+
+#titleWrapper a {
+	font: 32px Times New Roman, sans-serif;
+	color: gold;
+	float: left;
+	padding: 10px;
+}
+
+#daylistTitleBar {
+	display: flex;
+	flex-direction: row;
+
+	justify-content: space-between;
+
+	vertical-align: top;
+
+	padding: 10px;
+
+	border: 1px solid goldenrod;
+}
+
+#daylistContent {
+}
+
+#taskTableDiv {
+}
+
+#taskTableDiv table {
+	width: 95%;
+
+	background: black;
+	color: whitesmoke;
+
+	border-collapse: collapse;
+}
+
+#taskTableDiv table th {
+	vertical-align: top;
+
+}
+
+#taskTableDiv table td {
+	text-align: center;
+	
+	padding: 10px;
+}
+
+.itemDate {
+	font: 16px Helvetica;
+}
+
+.itemName {
+	font: 24px Helvetica;
+}
+
+.itemControl {
+	font: 14px Times;
+}
+
+.itemNameDone {
+	text-align: center; 
+	text-decoration: line-through; 
+	
+	font: 22px Helvetica;
+}
+
+#navArrowDiv {
+	padding: 10px; 
+	
+	font: 32px Helvetica; 
+	
+	background: black; 
+	color: gold; 
+	
+	border: 1px solid gold; 
+	
+	display: flex; 
+	flex-direction: row; 
+	justify-content: space-between; 
+	vertical-align: top;
+}
+
+#navArrowHistDiv {
+	padding: 10px; 
+	
+	font: 32px Helvetica; 
+	
+	background: black; 
+	color: dimgray; 
+	
+	border: 1px solid gold; 
+	
+	display: flex; 
+	flex-direction: row; 
+	justify-content: space-between; 
+	vertical-align: top;
+}
+
+#dateRefDetailsTable {
+	float: right;
+	width: 750px;
+	overflow: auto;
+}
+
+#dateRefDetailsTable table {
+	border: 0;
+}
+
+#dateRefDetailsTable table th {
+	background: #EEE;
+	font-weight: 600;
+	padding: 10px 10px;
+	text-align: left;
+}
+
+#dateRefDetailsTable table tbody {
+	padding: 0;
+	margin: 0;
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+
+#dateRefDetailsTable table td {
+	background: blue;
+	color: yellow;
+	padding: 5px 10px;
+	text-align: left;
+}
+
+#refsTable {
+	float: left;
+	width: 100%;
+	overflow: auto;
+}
+
+#refsTable table {
+	border-collapse: separate;
+	border-spacing: 1px;
+	background: #CCC;
+}
+
+#refsTable table th {
+	background: #EEE;
+	font-weight: 600;
+	padding: 10px 20px;
+	text-align: center;
+}
+
+#refsTable table tbody {
+	padding: 0;
+	margin: 0;
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+
+#refsTable table td {
+	background: #FFF;
+	padding: 5px 5px;
+	text-align: left;
+}
+
+#statsTable {
+	float: left;
+	overflow: auto;
+}
+
+#statsTable table {
+	border-collapse: separate;
+	border-spacing: 1px;
+	background: #CCC;
+	padding: 1px;
+}
+
+#statsTable table th {
+	background: #EEE;
+	font-weight: 600;
+	padding: 10px 20px;
+	text-align: center;
+}
+
+#statsTable table tbody {
+	padding: 0;
+	margin: 0;
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+
+#statsTable table td {
+	background: #FFF;
+	padding: 5px 10px;
+	text-align: center;
+}
+
+
+#formWrapper {
+	padding-left: 30px;
+	width: 700px;
+	position: relative;
+	background: blue;
+}
+
+
+#factoryInfo {
+	position: relative;
+	top: 0;
+	left: 0;
+}
+
+#factoryInfo table {
+	width: 50%;
+	border-collapse: separate;
+	border-spacing: 1px;
+	background: #CCC;
+}
+
+#factoryInfo table th {
+	padding: 10px 10px;
+    font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+    text-align: center;
+}
+
+
+#factoryInfo table tbody {
+	padding: 0;
+	margin: 0;
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+
+#factoryInfo table td {
+	background: #FFF;
+	padding: 10px 10px;
+	text-align: left;
+	font: 14px Times New Roman, sans-serif;
+}
+
+#factoryList {
+	width: 300px;
+	font: 12px Times New Roman, sans-serif;
+}
+	
+#eventPopupForm, #imageUploader {
+	width: 100%;
+
+	font: 16px Verdana;
+	font-weight: 800;
+
+}
+
+#eventForm {
+	background-color: darkslategrey;
+	color: antiquewhite;
+}
+
+#eventFlds {
+	padding: 20px;
+}
+
+.eventField {
+	display: flex;
+	flex-direction: row;
+
+	justify-content: space-between;
+}
+
+.eventFieldInput {
+	font: 18px Times;
+}
+
+.eventNotesField {
+	font: 16px Times;
+}
+
+#imageForm {
+	background-color: darkslategrey;
+	color: antiquewhite;
+}
+
+#imageFlds {
+	border: none;
+	display: flex; 
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+
+.ui-dialog 
+.ui-dialog.event-dialog .ui-dialog-titlebar-close {
+	display: none;
+}
+
+#parentBar {
+	background-color: gold; 
+	color: black; 
+	font: 32px Helvetica; 
+	font-weight: 800;
+
+	text-align: center; 
+	height: 50px; 
+	width: auto;
+}
+
+#loginWrapper {
+	background-color: wheat;
+
+	display: flex;
+	flex-direction: row;
+
+	justify-content: center;
+}
+
+#loginInfo {
+	margin: 0 auto;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+
+#etName {
+	display: flex; 
+	flex-flow: row; 
+	justify-content: space-between; 
+	align-items: center; 
+	padding: 5px; 
+	background-color: antiquewhite; 
+	border: 1px solid black;
+}
+
+#daylistPane {
+	background: black;
+	color: whitesmoke;
+
+	width: 100%;
+
+	padding: 20px;
+}
+
+#daylistContent {
+	width: 100%;
+}
+
+
+#lifeAreasTable {
+	width: 100%;
+}
+
+#lifeAreasTable table {
+	width: 90%;
+	border-collapse: collapse;
+}
+
+#lifeAreasTable td {
+	font: 28px Helvetica;
+	font-weight: bold;
+
+	padding: 25px;
+}
+
+#objectivesTable {
+	width: 100%;
+}
+
+#objectivesTable table {	
+	width: 90%;
+	border-collapse: collapse;
+}
+
+#objectivesTable td {
+	font: 16px Helvetica;
+	font-weight: bold;
+
+	padding: 10px;
+}
+
+
+.daylistActionButton {
+	height: 40px;
+	width: 40px;
+
+	font: 24px Helvetica;
+	font-weight: 600;
+
+	color: white;
+	background: darkslateblue;
+
+	vertical-align: center;
+}
+
+.editorActionButton {
+	padding-left: 20px;
+	padding-right: 20px;
+
+	height: 50px;
+
+	font: 20px Helvetica;
+}
+
+.editorCancelButton {
+	padding-left: 40px;
+	padding-right: 40px;
+
+	height: 50px;
+
+	font: 20px Helvetica;
+	font-weight: 800;
+}
+
+
+#countdownTable {
+	width: 90%;
+	padding-left: 30px;
+	padding-top: 30px;
+}
+
+.countdownTitle {
+	padding: 5px;
+
+	font: 28px Helvetica; 
+	color: gold; 
+	
+	border: 1px solid gold;
+}
+
+.countdownCell {
+	width: 15%; 
+	padding: 5px; 
+
+	font: 56px Helvetica; 
+	text-align: center;
+
+	background-color: gold; 
+	color: black; 
+	
+	border: 3px solid darkblue;
+}
+
+.countdownLabel {
+	font: 14px Helvetica; 
+	text-align: center;
+
+	color: white;
+}
+
+.navTabDiv {
+	width: 90%;
+
+	padding-top: 20px;
+	padding-bottom: 20px;
+
+	display: flex;
+	flex-direction: row;
+
+	justify-content: space-between;
+}
+
+.navTabs {
+	width: 500px;
+	height: 40px;
+
+	padding: 5px;
+
+	border-radius: 25px;
+
+	font: 32px Helvetica;
+	font-weight: 800;
+
+	background: gray;
+	color: white;
+
+	text-align: center;
+	vertical-align: center;
+}
+
+.navTabs a {
+	text-decoration: none;
+
+	color: white;
+}
+
+#areaPopup {
+	width: 100%;
+
+	overflow: auto;
+}
+
+#areaForm {
+	width: 700px;
+	height: auto;
+
+	font: 16px Helvetica;
+	font-weight: 800;
+
+	background-color: black;
+	color: antiquewhite;
+
+	border: 2px solid goldenrod;
+}
+
+#objPopup {
+	width: 100%;
+
+	overflow: auto;
+}
+
+#objForm {
+	width: 700px;
+	height: auto;
+
+	font: 16px Helvetica;
+	font-weight: 800;
+
+	background-color: black;
+	color: antiquewhite;
+
+	border: 2px solid goldenrod;
+}
+
+#completionPopup {
+	width: 100%;
+
+	font: 16px Helvetica;
+	font-weight: 800;
+}
+
+#compForm {
+	background-color: black;
+	color: antiquewhite;
+
+	padding: 20px;
+
+	border: 2px solid goldenrod;
+}
+
+#taskPopup {
+	width: 100%;
+
+	display: flex;
+	flex-direction: column;
+
+	align-items: center;
+}
+
+#taskForm {
+	background-color: black;
+	color: antiquewhite;
+	padding: 20px;
+
+	width: 700px;
+	height: auto;
+
+	border: 2px solid goldenrod;
+
+	font: 16px Helvetica;
+}
+
+.taskFormTitle {
+	font: 24px Times New Roman, sans-serif;
+	color: goldenrod;
+
+	padding: 10px;
+
+	width: 80%;
+	text-align: center;
+}
+
+#taskHistoryTable {
+	width: 90%;
+
+	background: black;
+
+	font: 22px Helvetica;	
+}
+
+#taskHistoryTable th {
+	padding: 10px;
+}
+
+#taskHistoryTable td {
+	font: 18px Helvetica;	
+	color: lightslategray;
+
+	padding: 5px;
+}
+
+.taskField {
+	display: flex;
+	flex-direction: row;
+
+	justify-content: space-between;
+}
+
+.taskFieldInput {
+	font: 20px Helvetica;
+
+	padding: 5px;
+}
+
+.taskFieldSelect {
+	font: 20px Helvetica;
+
+	padding: 5px;
+}
+
+#gameplanPane {
+	background: black;
+	color: whitesmoke;
+
+	width: 100%;
+
+	padding: 20px;
+
+}
+
+#gameplanContent {
+	text-align: center;
+}
+
+#objectivesEditor {
+	display: flex;
+	flex-direction: column;
+
+	align-items: center;
+}
+
+
+#gameplanLists{
+	display: flex;
+	flex-direction: row;
+
+	justify-content: space-between;
+
+	width: 95%;
+}
+
+
+#hamburgerMenu {
+	width: 150px; 
+
+	display: flex; 
+	flex-direction: column; 
+	align-items: flex-start;
+
+	margin-left: 20px; 
+	background: black;
+}
+
+.hamburgerMenuItem {
+	width: 250px;
+	height: 35px;
+
+	padding: 10px;
+
+	font: 24px Helvetica;
+	font-weight: 600;
+
+	background: gray;
+
+	text-align: center;
+	vertical-align: center;
+
+	border: 1px solid gold;
+}
+
+.hamburgerMenuItem a {
+	text-decoration: none;
+
+	color: white;
+}
+
+
+
+.ui-dialog-titlebar {
+	color: yellow;
+}
+
+.ui-dialog-title {
+	color: black;
+}
+
+.ui-dialog-titlebar button {
+	display: none;
+}
+
+/* media query overrides */
+
+@media screen and (max-device-width: 768px) {
+	/* make fonts larger for phones */
+
+	#taskTableDiv td {
+		height: 90px;
+	}
+
+	.itemName a {
+	  font: 42px Helvetica;
+	}
+
+	.itemNameDone {
+		font: 42px Helvetica;
+	}
+
+	#objectivesTable a {
+		font: 36px Helvetica;
+	}
+
+	#lifeAreasTable {
+		font: 42px Helvetica;
+	}
+
+	.taskField {
+		font: 24px Helvetica;
+	}
+
+	.taskFieldInput {
+		font: 26px Helvetica;
+	}
+}
+
+

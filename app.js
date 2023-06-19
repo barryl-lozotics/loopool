@@ -9,6 +9,11 @@ const routes = require("./routes/index");
 
 
 //
+// constants
+var cookieAge = 1000 * 60 * 60 * 24 * 7 * 4 * 3 // 3 months
+
+
+//
 // Database
 //
 var dbHandle = {};
@@ -76,45 +81,38 @@ config.processConfig(function (configDbHandle, configSysDbHandle, configSysDbCon
 
 	app.use(cookieParser());
 
-	/*
+	//
+	// detect cookie
 	app.use(function (req, res, next) {
 
 		// console.log('>>>> req.cookies: %s', JSON.stringify(req.cookies));
-		// console.log('>>>> req.session: %s', JSON.stringify(req.session));
 
-		var cookie = req.cookies.tlSession;
+		var cookie = req.cookies.loopoolUser;
 		if (cookie == undefined) {
 			//
 			// no: set a new cookie
-			console.log('>>>>> no tlSession cookie found');
+			console.log('>>>>> no loopool cookie found');
 
 			var randomNumber = Math.random().toString();
 			randomNumber = randomNumber.substring(2, randomNumber.length);
-			res.cookie('tlSession', randomNumber, { maxAge: cookieAge, httpOnly: true });
+			res.cookie('loopoolUser', randomNumber, { maxAge: cookieAge, httpOnly: true });
 
-			logSessionId = randomNumber;
+			req.cookies.loopoolUser = randomNumber;
+			console.log('\n\n>>>> setting loopoolUser cookie: [%s]', req.cookies.loopoolUser);
+
 		} else {
-			logSessionId = req.cookies.tlSession;
 
-			//		console.log('\n\n>>>> tlSession cookie: [%s]', logSessionId);
+//			console.log('\n\n>>>> found loopoolUser cookie: [%s]', req.cookies.loopoolUser);
 		}
 
 		//
 		// log metadata from every incoming request
 		//
-		// for now, take hostname out, since it's not passed through the load-balancer
-		//	var logRecord = '[' + req.hostname + ']: ' + req.method + ' ' + req.originalUrl;
 		var logRecord = req.method + ' ' + req.originalUrl;
-		console.log('\n\n[%s]\t%s\n', logSessionId, logRecord);
-
-		//
-		// log session state
-		//	logger.log('debug', 'req.session: [%s]', JSON.stringify(req.session));
+		console.log('\n\n[%s]\t%s\n', req.cookies.loopoolUser, logRecord);
 
 		next();
-
 	});
-	*/
 
 	//
 	// use content assets from this path
