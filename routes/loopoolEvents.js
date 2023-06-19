@@ -81,6 +81,9 @@ router.post('/new',
 
 	var theRecord = {};
 
+	var eventTimestamp = new Date();
+	theRecord.eventTimestamp = eventTimestamp.toISOString();
+
 	theRecord.user = req.body.user;
 	theRecord.incomingIP = req.body.incomingIP;
 	theRecord.userAgent = req.body.userAgent;
@@ -89,34 +92,18 @@ router.post('/new',
 
 	console.log('>>>> theRecord: %s', JSON.stringify(theRecord));
 
-	/*
 	//
 	// address db
-	var o_id = ObjectID(theRecord._id);
-	mongojsDb.objectives.findAndModify({
-		query: { '_id': o_id },
-		update: {
-			$set: {
-				'objectiveName' : theRecord.objectiveName,
-				'objectiveNotes' : theRecord.objectiveNotes,
-
-				'areaRef' : theRecord.areaRef,			}
-		},
-		upsert: false
-	}, function (err, doc, lastErrorObject) {
+	mongojsDb.loopoolEvents.insert(theRecord, function(err, result){
 		if (err) {
-			console.log('>>>> ERROR: DB reports: %s', err);
+			console.log('>>>>> DB error: %s', err);
+		} else {
+			//
+			// respond
+			res.send( { msg: '' });
 		}
-
-//					console.log('>>>> [%s] DB updated', objId);
-
-		res.send( { msg: '' });
 	});
-	*/
 
-	//
-	// wire for test
-	res.send( { msg: '' });
 });
 
 
