@@ -1,11 +1,11 @@
 //
-// loopool - command module
+// loopool - query module
 // (c) 2023 lozotics llc all rights reserved
 //
 
 //
 // constants
-var thisLocation = '/command';
+var thisLocation = '/query';
 var copyrightString = '(c) 2023 lozotics llc all rights reserved';
 		
 //
@@ -43,7 +43,7 @@ $(document).ready(function () {
 	var evIndex = queryDict.ev;
 	console.log('>>> timelineEvents ev [%s] et [%s] yr [%s]', evIndex, eTypeIndex, targetYear);
 	*/
-	console.log('>>> loopool command controller');
+	console.log('>>> loopool query controller');
 
 	/*
 	//
@@ -144,6 +144,7 @@ function displayUserData(callback) {
 
 	infoStr += '<h2 style="text-align: center;">Welcome User ' + userData.user + '<h2>';
 
+	/*
 	infoStr += '<table>';
 
 	infoStr += '<tr>';
@@ -162,6 +163,7 @@ function displayUserData(callback) {
 	infoStr += '</tr>';
 
 	infoStr += '</table>';
+	*/
 
 	//
 	// render
@@ -172,7 +174,7 @@ function displayUserData(callback) {
 	// build content for userControls
 	var controlStr = '';
 
-	controlStr += '<h2 style="text-align: center;">Command Controls<h2>';
+	controlStr += '<h2 style="text-align: center;">Query Controls<h2>';
 
 	controlStr += '<div id="userControlsButtonPad">';
 	controlStr += '<button id="loadButton"></button>';

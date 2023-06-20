@@ -50,6 +50,41 @@ router.get('/command',
 );
 
 
+/* GET query module page. */
+
+router.get('/query',
+  function (req, res) {
+
+    var relVersion = "";
+    var relDate = "";
+
+    if (req.configData.releaseVersion !== undefined) {
+      relVersion = req.configData.releaseVersion;
+      relDate = req.configData.releaseDate;
+
+    } else {
+      relVersion = req.configData.build.releaseVersion;
+      relDate = req.configData.build.releaseDate;
+    }
+
+    var reqHeaders = req.headers;
+    var reqIP = req.ip;
+
+    res.render('query', {
+
+      releaseVersion: relVersion,
+      releaseDate: relDate,
+
+      pageTitle: 'loopool: query',
+
+      reqHeaders: reqHeaders,
+      reqIP: reqIP,
+
+
+    });
+  }
+);
+
 
 
 module.exports = router;
