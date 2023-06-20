@@ -802,6 +802,118 @@ router.get('/history', function(req, res) {
 
 });
 
+/*
+ * GET summary of recent activity
+ */
+router.get('/summary', function(req, res) {
+	var mongojsDb = req.db;
+
+	/*
+	var mongojsSysDb = req.sysDb;
+	var reqToken = req.query.at;
+	var userToken = getUserForAccessToken(mongojsSysDb, reqToken, function(userToken) {
+
+		if (userToken == null) {
+			console.log('>>> objectives/get: at: [%s] TOKEN INVALID', reqToken);
+
+			res.json(null);
+
+		} else {
+			var targetId = userToken.userId;
+	*/
+	
+	console.log('>>> loopoolEvents/summary');
+
+	var eventsArray = [];
+	var areasArray = [];
+
+	async.waterfall([
+		function (callback) {
+			//
+			// fetch events list from db
+			//
+			mongojsDb.loopoolEvents.find( {}, {}, function (err, data) {
+				if (err) { console.log('>>>> DB ERROR: %s', err); callback(err); }
+
+				console.log('>>>>> db returned [%d] event records', data.length);
+
+				data.forEach(function(nextD) {
+					eventsArray.push(nextD);
+				});
+
+				callback(null);
+			});
+		},
+
+		/*
+		//
+		// fetch areas
+		function (callback) {
+			//
+			// fetch lifeAreas list from db
+			//
+			mongojsDb.lifeAreas.find({ 'authUserId': targetId }, {}, function (err, data) {
+				if (err) { console.log('>>>> DB ERROR: %s', err); callback(err); }
+
+				data.forEach(function(nextD) {
+					areasArray.push(nextD);
+				});
+
+				callback(null);
+			});
+		},
+
+		//
+		// fetch colors from lifeareas
+		function(callback) {
+			//
+			// look up for objective and populate color
+			objsArray.forEach(function(nextObj) {
+				nextObj.areaColor = 'areaNotFound';
+
+				areasArray.forEach(function(nextArea) {
+
+					if (nextArea._id == nextObj.areaRef) {
+						nextObj.areaColor = nextArea.areaColor;
+					}
+				});
+			});
+
+			callback(null);
+		},
+		*/
+
+		function (callback) {
+
+			/*
+				//
+				// group by eventType
+				data.sort(function(a, b) {
+				if (a.eventType > b.eventType) {
+					return 1;
+				} else if (a.eventType == b.eventType) {
+					return 0;
+				} else {
+					return -1;
+				}
+				});
+				*/
+
+			//
+			// respond with json
+			//
+			console.log('>>> returning [%d] events', eventsArray.length);
+
+			var returnObj = {};
+			returnObj.eventsArray = eventsArray;
+
+			res.json(returnObj);
+
+			callback();
+		}
+	]);
+});
+
 
 
 

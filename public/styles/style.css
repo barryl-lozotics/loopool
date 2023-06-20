@@ -56,7 +56,7 @@ h4 {
 }
 
 #userInfo {
-	height: 325px;
+	height: auto;
 
 	margin: 0 auto;
 	padding: 25px;
@@ -80,7 +80,7 @@ h4 {
 }
 
 #userControls {
-	height: 325px;
+	height: auto;
 	
 	margin: 0 auto;
 	padding: 25px;
@@ -157,6 +157,49 @@ h4 {
 }
 
 #loadMetrics td {
+	font: 14px Courier;
+	color: whitesmoke;
+
+	border: 1px solid silver;
+
+	padding: 10px;
+}
+
+#latestEvents {
+	height: auto;
+	width: auto;
+
+	margin: 0 auto;
+	
+	border: 2px solid gold;
+}
+
+#latestEvents h2 {
+	font: 24px Helvetica;
+	color: gold;
+
+	text-align: center;
+}
+
+#latestEvents h3 {
+	font: 18px Helvetica;
+	color: silver;
+
+	text-align: center;
+}
+
+#latestEvents th {
+	font: 16px Helvetica;
+	color: silver;
+
+	text-align: center;
+
+	border: 2px solid silver;
+
+	padding: 10px;
+}
+
+#latestEvents td {
 	font: 14px Courier;
 	color: whitesmoke;
 
