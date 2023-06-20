@@ -90,6 +90,8 @@ router.post('/new',
 	theRecord.secChUa = req.body.secChUa;
 	theRecord.secChUaPlatform = req.body.secChUaPlatform;
 
+	theRecord.loadName = req.body.loadName;
+
 	console.log('>>>> theRecord: %s', JSON.stringify(theRecord));
 
 	//

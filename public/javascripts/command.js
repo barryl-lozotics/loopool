@@ -15,6 +15,8 @@ var userData = {};
 var loadTimer = {};
 var loadInterval = 2000;
 
+var loadName = '';
+
 var transTimes = {};
 transTimes.totalTime = 0;
 transTimes.totalTrans = 0;
@@ -179,8 +181,17 @@ function displayUserData(callback) {
 	controlStr += '</div>';
 
 	controlStr += '<div id="userControlsValues">';
+
+	controlStr += '<div id="intervalControl" class="userControlsValues">';
 	controlStr += '<h3>Transaction interval (ms)</h3>';
-	controlStr += '<input id="transRate" size=10 />'
+	controlStr += '<input id="transRate" size=10 />';
+	controlStr += '</div>';
+
+	controlStr += '<div id="loadNameControl" class="userControlsValues">';
+	controlStr += '<h3>Load name</h3>';
+	controlStr += '<input id="loadName" size=15 />';
+	controlStr += '</div>';
+
 	controlStr += '</div>';
 
 	//
@@ -219,7 +230,7 @@ function displayResults(callback) {
 		infoStr += '<table style="margin: 0 auto; width: 50%;">';
 
 		var latestStart = new Date(transTimes.latestLoadStart);
-		infoStr += '<th colspan=2>For load run started: <br>' + latestStart.toLocaleString() + '</th>';
+		infoStr += '<th colspan=2>For load run ' + loadName + '<br>started: ' + latestStart.toLocaleString() + '</th>';
 
 		infoStr += '<tr>';
 		infoStr += '<td>Total Transactions</td>';
@@ -267,6 +278,7 @@ function handleLoadButton(init) {
 			//
 			// commence load generation
 			loadInterval = $("#transRate").val();
+			loadName = $("#loadName").val();
 			loadTimer = setInterval(loadTransaction, loadInterval);
 
 			loadingState = true;
@@ -278,6 +290,8 @@ function handleLoadButton(init) {
 			//
 			// cease load generation
 			clearInterval(loadTimer);
+			loadName = '';
+			$("#loadName").val(loadName);
 
 			loadingState = false;
 			console.log('>>>> Load stopped: %s', toggleTime.toLocaleString());
@@ -297,6 +311,8 @@ function loadTransaction() {
 	eventData.userAgent = userData.headers.userAgent;
 	eventData.secChUa = userData.headers.secChUa;
 	eventData.secChUaPlatform = userData.headers.secChUaPlatform;
+
+	eventData.loadName = loadName;
 
 	//
 	// call the back-end route with an Ajax POST
