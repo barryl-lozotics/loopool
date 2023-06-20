@@ -1,11 +1,11 @@
 //
-// loopool - main
+// loopool - command module
 // (c) 2023 lozotics llc all rights reserved
 //
 
 //
 // constants
-var thisLocation = '/main';
+var thisLocation = '/command';
 var copyrightString = '(c) 2023 lozotics llc all rights reserved';
 		
 //

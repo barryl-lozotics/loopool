@@ -14,9 +14,9 @@ router.get('/',
 );
 
 
-/* GET main page. */
+/* GET command module page. */
 
-router.get('/main',
+router.get('/command',
   function (req, res) {
 
     var relVersion = "";
@@ -35,12 +35,12 @@ router.get('/main',
     var reqHeaders = req.headers;
     var reqIP = req.ip;
 
-    res.render('main', {
+    res.render('command', {
 
       releaseVersion: relVersion,
       releaseDate: relDate,
 
-      pageTitle: 'loopool: main',
+      pageTitle: 'loopool: command',
 
       reqHeaders: reqHeaders,
       reqIP: reqIP,
