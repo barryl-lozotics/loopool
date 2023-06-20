@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "PORT=30017 node ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "async": "~3.2.3",
