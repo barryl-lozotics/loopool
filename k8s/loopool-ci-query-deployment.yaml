@@ -1,0 +1,36 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: loopool-ci-query-deployment
+spec:
+  selector:
+    matchLabels:
+      app: loopool-query
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: loopool-query
+    spec:
+      containers:
+      - name: loopool
+        image: lozierb/loopool:loopool-ci
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 30018
+        volumeMounts:
+        - name: config
+          mountPath: "/config"
+          readOnly: true
+      imagePullSecrets:
+      - name: dockercred
+      volumes:
+      # You set volumes at the Pod level, then mount them into containers inside that Pod
+      - name: config
+        configMap:
+          # Provide the name of the ConfigMap you want to mount.
+          name: loopool-app
+          # An array of keys from the ConfigMap to create as files
+          items:
+          - key: "application.properties"
+            path: "application.properties"
