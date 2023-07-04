@@ -16,5 +16,5 @@ RUN npm install
 COPY . .
 
 EXPOSE 30017
-CMD [ "npm", "run startCommand" ]
+CMD [ "npm", "run", "startCommand" ]
 
