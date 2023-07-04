@@ -16,4 +16,8 @@ RUN npm install
 COPY . .
 
 EXPOSE 30017
-CMD [ "npm", "start" ]
+CMD [ "npm", "run startCommand" ]
+
+EXPOSE 30018
+CMD [ "npm", "run startQuery" ]
+
