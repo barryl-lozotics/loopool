@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "startCommand": "PORT=30017 node ./bin/www",
-    "startQuery": "PORT=30018 node ./bin/www"
+    "start": "PORT=30017 node ./bin/www"
   },
   "dependencies": {
     "async": "~3.2.3",
