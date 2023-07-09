@@ -1,12 +1,10 @@
 //
 // loopool - query module
-// (c) 2023 lozotics llc all rights reserved
 //
 
 //
 // constants
 var thisLocation = '/query';
-var copyrightString = '(c) 2023 lozotics llc all rights reserved';
 		
 //
 // cache
