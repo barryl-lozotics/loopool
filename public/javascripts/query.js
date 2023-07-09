@@ -143,28 +143,10 @@ function displayUserData(callback) {
 	// build html content for userInfo
 	var infoStr = '';
 
-	infoStr += '<h2 style="text-align: center;">Welcome User ' + userData.user + '<h2>';
-
-	/*
-	infoStr += '<table>';
-
-	infoStr += '<tr>';
-	infoStr += '<td>incomingIP</td>';
-	infoStr += '<td>' + userData.ip + '</td>';
-	infoStr += '</tr>';
-
-	infoStr += '<tr>';
-	infoStr += '<td>userAgent</td>';
-	infoStr += '<td>' + userData.headers.userAgent + '</td>';
-	infoStr += '</tr>';
-
-	infoStr += '<tr>';
-	infoStr += '<td>platform</td>';
-	infoStr += '<td>' + userData.headers.secChUaPlatform + '</td>';
-	infoStr += '</tr>';
-
-	infoStr += '</table>';
-	*/
+	var userStrings = [];
+	userStrings = userData.user.split(";");
+	var userStr = userStrings[0];
+	infoStr += '<h2 style="text-align: center;">Welcome User ' + userStr + '<h2>';
 
 	//
 	// render

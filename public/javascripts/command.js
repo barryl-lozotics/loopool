@@ -142,7 +142,10 @@ function displayUserData(callback) {
 	// build html content for userInfo
 	var infoStr = '';
 
-	infoStr += '<h2 style="text-align: center;">Welcome User ' + userData.user + '<h2>';
+	var userStrings = [];
+	userStrings = userData.user.split(";");
+	var userStr = userStrings[0];
+	infoStr += '<h2 style="text-align: center;">Welcome User ' + userStr + '<h2>';
 
 	infoStr += '<table>';
 

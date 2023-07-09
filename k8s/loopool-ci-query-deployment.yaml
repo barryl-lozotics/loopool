@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: loopool
-        image: lozierb/loopool:loopool-ci
+        image: lozierb/lozotics:loopool-ci
         imagePullPolicy: Always
         ports:
         - containerPort: 30018
