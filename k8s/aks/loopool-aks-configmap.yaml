@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: loopool-app
+  namespace: loopool
+data:
+  # property-like keys; each key maps to a simple value
+#  player_initial_lives: "3"
+#  ui_properties_file_name: "user-interface.properties"
+
+  # file-like keys
+  application.properties: |
+    mainDbConnectionString=mongodb://loopool-cosmos:eRfzYSpRr86JJCdVfCbczQqFsxKD4MQG2h3trkKOV1ez8QNrd5VClI4sHHavKxzBaq32U3F15PEDACDbJ98DNw==@loopool-cosmos.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&appName=@loopool-cosmos@:27017/loopool
+    sysDbConnectionString=mongodb://loopool-cosmos:eRfzYSpRr86JJCdVfCbczQqFsxKD4MQG2h3trkKOV1ez8QNrd5VClI4sHHavKxzBaq32U3F15PEDACDbJ98DNw==@loopool-cosmos.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&appName=@loopool-cosmos@:27017/loopool-system
+    useMinifiedJS=false
+    releaseVersion=0.1.0
+    releaseDate=07/09/2023

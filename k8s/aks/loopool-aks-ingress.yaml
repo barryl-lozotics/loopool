@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: loopool-ingress
+  namespace: loopool
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: nginx-test.f5b52ab3df1442a6b467.westus3.aksapp.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-test-svc
+            port:
+              number: 80
+  - host: loopool-command.f5b52ab3df1442a6b467.westus3.aksapp.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: loopool-command-svc
+            port:
+              number: 80
+  - host: loopool-query.f5b52ab3df1442a6b467.westus3.aksapp.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: loopool-query-svc
+            port:
+              number: 80

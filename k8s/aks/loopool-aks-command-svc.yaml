@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: loopool-command-svc
+  namespace: loopool
+  labels:
+    app: loopool-command
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 30017
+  selector:
+    app: loopool-command
