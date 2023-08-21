@@ -46,32 +46,6 @@ $(document).ready(function () {
 	*/
 	console.log('>>> loopool query controller');
 
-	/*
-	//
-	// process input args
-
-	var reqDate = queryDict.reqDate;
-	var taskIndex = queryDict.task;
-
-	if (reqDate !== undefined) {
-		console.log('>>>> for daylistDate: [%s]', reqDate);
-		daylistDate = new Date(reqDate);
-
-		//
-		// fix stale browser windows
-		var now = new Date();
-		if (daylistDate.toLocaleDateString() !== now.toLocaleDateString()) {
-
-			if (daylistDate < now) {
-				console.log('>>>>> past daylistDate, redirecting');
-				window.location = '/daylistViewer';
-			}
-		}
-	}
-	*/
-
-//	userData.user = document.getElementsByName('reqUser')[0].getAttribute('content');
-
 	var headerStr = document.getElementsByName('reqHeaders')[0].getAttribute('content');
 	var ipStr = document.getElementsByName('reqIP')[0].getAttribute('content');
 
@@ -232,7 +206,11 @@ function displayResults(callback) {
 			infoStr += '<tr>';
 
 			infoStr += '<td>' + evObj.eventTimestamp + '</td>';
-			infoStr += '<td>' + evObj.user + '</td>';
+
+			var userStrings = [];
+			userStrings = evObj.user.split(";");
+			var userStr = userStrings[0];
+			infoStr += '<td>' + userStr + '</td>';
 
 			infoStr += '<td>' + evObj.loadName + '</td>';
 

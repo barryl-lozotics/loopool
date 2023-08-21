@@ -18,7 +18,7 @@ terraform {
   required_version = ">= 1.1.0"
 }
 
-# use the lozotics subscription
+# use a dedicated subscription: 'loopool'
 provider "azurerm" {
   features {}
 
@@ -138,7 +138,7 @@ resource "azurerm_kubernetes_cluster" "loopool_aks" {
 
   default_node_pool {
     name            = "default"
-    node_count      = 2
+    node_count      = 1
     vm_size         = "Standard_B2s"
     os_disk_size_gb = 30
     vnet_subnet_id  = azurerm_subnet.int_subnet.id
@@ -151,10 +151,44 @@ resource "azurerm_kubernetes_cluster" "loopool_aks" {
   http_application_routing_enabled = true
 
   tags = {
-    environment = "Production"
+    environment = "production"
   }
 
   depends_on = [azurerm_subnet.ext_subnet, azurerm_subnet.int_subnet]
+}
+
+#
+# node pools for workloads
+resource "azurerm_kubernetes_cluster_node_pool" "loopool_command_nodepool" {
+  name                  = "commandpool"
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.loopool_aks.id
+  vm_size               = "Standard_DS2_v2"
+
+  node_count            = 3
+
+  node_labels = {
+    workload_type = "command"
+  }
+
+  tags = {
+    environment = "production"
+  }
+}
+
+resource "azurerm_kubernetes_cluster_node_pool" "loopool_query_nodepool" {
+  name                  = "querypool"
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.loopool_aks.id
+  vm_size               = "Standard_DS2_v2"
+
+  node_count            = 1
+
+  node_labels = {
+    workload_type = "query"
+  }
+
+  tags = {
+    environment = "production"
+  }
 }
 
 #

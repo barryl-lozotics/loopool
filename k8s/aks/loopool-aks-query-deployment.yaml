@@ -25,6 +25,8 @@ spec:
           readOnly: true
       imagePullSecrets:
       - name: dockercred
+      nodeSelector:
+        workload_type: query
       volumes:
       # You set volumes at the Pod level, then mount them into containers inside that Pod
       - name: config

@@ -10,8 +10,8 @@ data:
 
   # file-like keys
   application.properties: |
-    mainDbConnectionString=mongodb://loopool-cosmos:eRfzYSpRr86JJCdVfCbczQqFsxKD4MQG2h3trkKOV1ez8QNrd5VClI4sHHavKxzBaq32U3F15PEDACDbJ98DNw==@loopool-cosmos.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&appName=@loopool-cosmos@:27017/loopool
-    sysDbConnectionString=mongodb://loopool-cosmos:eRfzYSpRr86JJCdVfCbczQqFsxKD4MQG2h3trkKOV1ez8QNrd5VClI4sHHavKxzBaq32U3F15PEDACDbJ98DNw==@loopool-cosmos.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&appName=@loopool-cosmos@:27017/loopool-system
+    mainDbConnectionString=mongodb://loopool-cosmos:xQVKzUm4GwaQ0ZeafecxOVtylmmsLT1oXGHw7P6caSAaCIHqDcgHHrXQThpgoQ6mqfJKUhTA3mJJACDbaCby9A==@loopool-cosmos.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&appName=@loopool-cosmos@:27017/loopool
+    sysDbConnectionString=mongodb://loopool-cosmos:xQVKzUm4GwaQ0ZeafecxOVtylmmsLT1oXGHw7P6caSAaCIHqDcgHHrXQThpgoQ6mqfJKUhTA3mJJACDbaCby9A==@loopool-cosmos.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&appName=@loopool-cosmos@:27017/loopool-system
     useMinifiedJS=false
-    releaseVersion=0.1.0
-    releaseDate=07/09/2023
+    releaseVersion=0.2.0
+    releaseDate=08/21/2023

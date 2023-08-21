@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: loopool-command
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
@@ -25,6 +25,8 @@ spec:
           readOnly: true
       imagePullSecrets:
       - name: dockercred
+      nodeSelector:
+        workload_type: command
       volumes:
       # You set volumes at the Pod level, then mount them into containers inside that Pod
       - name: config
